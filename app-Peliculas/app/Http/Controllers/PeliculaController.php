@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Pelicula;
+use App\Models\Pelicula;
 use Illuminate\Http\Request;
 
 class PeliculaController extends Controller
@@ -15,6 +15,7 @@ class PeliculaController extends Controller
     public function index()
     {
         //
+        return view('pelicula.index');
     }
 
     /**
@@ -37,6 +38,10 @@ class PeliculaController extends Controller
     public function store(Request $request)
     {
         //
+        //$datosPelicula = request()->all();
+        $datosPelicula = request()->except('_token');
+        Pelicula::insert($datosPelicula);
+        return response()->json($datosPelicula); 
     }
 
     /**
